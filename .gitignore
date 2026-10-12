@@ -1,0 +1,16 @@
+# Python virtualenvs
+.venv/
+.venv-test/
+
+# Bytecode / test caches
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# Secrets — NEVER commit your real key
+.env
+
+# Runtime artifacts (regenerated on each run)
+docs/planner_logs/
+*.log

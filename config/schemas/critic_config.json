@@ -1,0 +1,146 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "description": "Frozen search configuration for one optimization round (v4.3).",
+  "properties": {
+    "base_params": {
+      "description": "Accepted params for delta mode: {\"gain_db\": float, \"freq_hz\": float}.",
+      "properties": {
+        "freq_hz": {
+          "type": "number"
+        },
+        "gain_db": {
+          "type": "number"
+        }
+      },
+      "type": "object"
+    },
+    "hard_constraints": {
+      "properties": {
+        "min_rms": {
+          "default": 1e-06,
+          "type": "number"
+        },
+        "peak_ceiling": {
+          "default": 0.999,
+          "type": "number"
+        },
+        "protected_bands": {
+          "description": "Optional list of [lo_hz, hi_hz, max_log_change_db] guard bands.",
+          "items": {
+            "items": {
+              "type": "number"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "intent": {
+      "description": "Short English description of the inferred intent, e.g. 'increase brightness moderately'.",
+      "type": "string"
+    },
+    "max_evaluations": {
+      "default": 15,
+      "type": "integer"
+    },
+    "mode": {
+      "description": "'delta' = incremental search offset from base_params.",
+      "enum": [
+        "full",
+        "delta"
+      ],
+      "type": "string"
+    },
+    "objective_id": {
+      "description": "Unique id for this round, e.g. '20261009-brighter-01'. All scores in this round share it; a re-plan gets a new id and scores are never mixed across ids.",
+      "type": "string"
+    },
+    "search_bounds": {
+      "properties": {
+        "freq_hz": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        },
+        "gain_db": {
+          "items": {
+            "type": "number"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        }
+      },
+      "required": [
+        "gain_db",
+        "freq_hz"
+      ],
+      "type": "object"
+    },
+    "seed": {
+      "default": 42,
+      "type": "integer"
+    },
+    "status": {
+      "description": "'unsupported' means the capability check failed; no search should start.",
+      "enum": [
+        "ok",
+        "unsupported"
+      ],
+      "type": "string"
+    },
+    "target_intervals": {
+      "additionalProperties": {
+        "items": {
+          "type": "number"
+        },
+        "maxItems": 2,
+        "minItems": 2,
+        "type": "array"
+      },
+      "description": "dimension name -> [lo, hi]; must lie inside the dimension's typical range.",
+      "type": "object"
+    },
+    "unsupported_reason": {
+      "description": "Required when status is 'unsupported'.",
+      "type": "string"
+    },
+    "clap_prompt": {
+      "description": "English descriptive prompt for the CLAP slow loop, e.g. 'a bright lead synth with airy highs'. No negations, no abstract words. Optional; falls back to the raw instruction.",
+      "type": "string"
+    },
+    "dsp_scores": {
+      "type": "object",
+      "description": "dimension name -> relevance score 0-10; scores <3 are zeroed, rest L1-normalized.",
+      "additionalProperties": {
+        "type": "number",
+        "minimum": 0,
+        "maximum": 10
+      }
+    },
+    "clap_weight": {
+      "type": "number",
+      "minimum": 0.0,
+      "maximum": 1.0,
+      "description": "CLAP vs DSP blend ratio; 0.0 = pure DSP."
+    }
+  },
+  "required": [
+    "objective_id",
+    "status",
+    "mode",
+    "intent",
+    "target_intervals",
+    "dsp_scores",
+    "hard_constraints",
+    "max_evaluations",
+    "seed"
+  ],
+  "title": "CriticConfig",
+  "type": "object"
+}

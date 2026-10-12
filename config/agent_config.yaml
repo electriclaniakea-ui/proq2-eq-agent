@@ -1,0 +1,130 @@
+# ProQ2-EQ-Agent runtime configuration (v4.3)
+# Secrets (API keys) go in .env, never here.
+
+# Which bridge talks to FL Studio: "midi" (direct, recommended -- no MCP
+# server needed) or "mcp" (via a stdio MCP server such as PostFader).
+bridge: "midi"
+
+midi_bridge:
+  # Dedicated loopMIDI port for bridge traffic (create it in loopMIDI,
+  # keep loopMIDI running). Use a dedicated port, not your music ports.
+  port_name: "ProQ2Bridge"
+  # Where the FL script lives (both Python and FL must see these files).
+  # null = %USERPROFILE%/Documents/Image-Line/FL Studio/Settings/Hardware/ProQ2Bridge
+  script_dir: null
+  timeout_s: 5.0
+
+mcp:
+  # Command that launches the MCP server (PostFader recommended).
+  # Example for PostFader installed via pip: command "postfader", args ["mcp"]
+  # Adjust to whatever your installed MCP server documents.
+  command: "postfader"
+  args: ["mcp"]
+  timeout_s: 30
+  # Tool-name mapping: PostFader/Zierax may name tools differently.
+  # Run `python scripts/dump_eq2_params.py --list-tools` after install to see
+  # actual names, then adjust here if needed.
+  tools:
+    list_plugin_params: "list_plugin_params"
+    get_plugin_param: "get_plugin_param"
+    set_plugin_param: "set_plugin_param"
+    get_tempo: "get_tempo"
+    get_song_pos: "get_song_pos"
+    set_song_pos: "set_song_pos"
+    is_playing: "is_playing"
+    transport_play: "transport_play"
+    transport_stop: "transport_stop"
+
+audio:
+  input_device: "CABLE Output (VB-Audio Virtual Cable), Windows WASAPI"
+  # VB-Cable output endpoint (what Python records).
+  # 必须是全名（含驱动类型），因为同一设备名在 MME/DirectSound/WASAPI/WDM-KS
+  # 下各出现一次，写简称会报 "Multiple input devices found"。
+  # Must be the FULL name (with driver type): the short name matches 4
+  # devices (one per audio API) and sounddevice refuses to guess.
+  # 查全名 / list names: .venv\Scripts\python.exe -c "import sounddevice; print(sounddevice.query_devices())"
+  sample_rate: 48000
+  blocksize: 1024
+  ring_seconds: 10
+
+pattern:
+  beats: 8                       # fixed loop length for the search
+
+eq:
+  # Param names as reported by YOUR FL Studio. Chinese FL returns Chinese
+  # names (e.g. "频段 2 增益"); English FL returns "Band 2 Gain".
+  # Run `scripts/dump_eq2_params.py` to see the actual names, then match.
+  gain_param: "频段 2 增益"
+  freq_param: "频段 2 频率"
+  # Optional: 0-based param indices as a fallback if name matching fails
+  # (e.g. due to encoding issues). From dump: 36 params, 0-6 gains,
+  # 7-13 freqs, so Band 2 Gain=1, Band 2 Freq=8. null = disabled.
+  gain_param_index: 1
+  freq_param_index: 8
+  # Output-gain reset (experimental control, 5.5). Fill the calibrated
+  # unity value after wiggle calibration; null = do not touch.
+  output_gain_param: null
+  output_gain_unity_norm: null
+  # ---- Multi-band search mode ----
+  # "single_band": Band 2 gain+freq only (2D, original MVP)
+  # "three_band": 3 bands × gain+freq (6D)
+  # "seven_gain": all 7 bands gain only, freq fixed (7D)
+  search_mode: "three_band"
+  # Which bands for three_band mode (1-based). Default [1,4,7] = low/mid/high.
+  three_band_ids: [1, 4, 7]
+  # Param name patterns. {n} = band number (1-based).
+  # gain_index = n-1, freq_index = 7+(n-1) for Fruity Parametric EQ 2.
+  band_gain_pattern: "频段 {n} 增益"
+  band_freq_pattern: "频段 {n} 频率"
+  # Search bounds for the optimizer (human-readable units).
+  # freq_bounds: [min_hz, max_hz] — Fruity Parametric EQ 2 goes down to ~10Hz.
+  #   Default [40, 12000]: covers sub-bass (kick punch at 50-80Hz) to presence.
+  freq_bounds: [40, 12000]
+  gain_bounds: [-12, 12]
+
+timing:
+  stability_threshold: 0.10     # 95th-percentile cosine distance (relaxed for real FL audio)
+  stability_percentile: 95
+  capture_timeout_s: 15
+  max_consecutive_anomalies: 3
+  min_baseline_rms: 0.01          # reject silence captures
+
+search:
+  init_points: 8
+  n_iter: 22
+  # 6D (three_band) needs ~30 evals; 2D (single_band) was 15.
+  # Increase for seven_gain (7D) if needed.
+  kappa: 2.576
+  kappa_decay: 0.95
+  seed: 42
+
+dsp:
+  n_fft: 2048
+  hop_length: 512
+
+clap:
+  enabled: true                  # competition default: OFF (see 5.3 / event rules)
+  model: "laion/larger_clap_music"
+  fallback_model: "laion/clap-htsat-unfused"
+  # CLAP+DSP fusion settings (v4.4+)
+  load_timeout_s: 90             # max wait for model load before DSP-only fallback
+  score_timeout_s: 3.0           # max wait per candidate for CLAP score
+  # Divergence detection: if DSP and CLAP disagree, dampen CLAP weight
+  divergence_window: 10          # track last N candidates with both scores
+  divergence_threshold: 0.3      # min Pearson correlation; below -> halve weight
+  divergence_min_weight: 0.05    # never dampen below this
+
+llm:
+  # Verified 2026-10-09 against official docs (https://agnes-ai.com/en/docs/overview,
+  # "5. Base URL"): OpenAI-compatible, POST {base_url}/chat/completions.
+  # API key: sign up at https://platform.agnes-ai.com → developer dashboard → generate key.
+  base_url: "https://apihub.agnes-ai.com/v1"
+  model: "agnes-3.0-flash"
+  timeout_s: 60
+  max_retries: 3
+
+paths:
+  params_json: "assets/eq2_params.json"
+  planner_logs: "docs/planner_logs"
+  trajectory_plots: "docs/trajectory_plots"
+  session_file: "docs/session_state.json"

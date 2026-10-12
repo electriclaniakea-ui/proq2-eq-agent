@@ -1,0 +1,19 @@
+# ProQ2-EQ-Agent dependencies (Windows / Python 3.10+)
+# DSP is implemented with numpy/scipy only (no librosa needed).
+
+numpy>=1.24
+scipy>=1.10
+matplotlib>=3.7
+pyyaml>=6.0
+bayesian-optimization>=3.0
+sounddevice>=0.4.6   # wheels bundle PortAudio on Windows; no separate install needed
+mcp>=1.0             # MCP client SDK, only needed if bridge: "mcp"
+mido>=1.3            # MIDI library for the direct MIDI bridge
+python-rtmidi>=1.5   # MIDI backend for mido (wheels available on Windows)
+
+# Testing
+pytest>=7.0
+
+# Optional: only needed if CLAP slow-loop diagnostics are enabled
+# (competition branch keeps CLAP OFF by default; see docs)
+# laion-clap>=1.1.6

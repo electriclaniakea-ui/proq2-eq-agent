@@ -1,0 +1,21 @@
+{
+ "_comment": "TEMPLATE - fill via scripts/calibrate_param_mapping.py (wiggle calibration). Do not hand-edit blindly.",
+ "params": {
+  "频段 2 频率": {
+   "calibration": null,
+   "kind": "freq",
+   "max": 20000,
+   "min": 20,
+   "scale": "log",
+   "unit": "Hz"
+  },
+  "频段 2 增益": {
+   "calibration": null,
+   "kind": "gain",
+   "max": 18,
+   "min": -18,
+   "scale": "linear",
+   "unit": "dB"
+  }
+ }
+}
