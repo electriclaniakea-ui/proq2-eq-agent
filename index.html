@@ -3,19 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ProQ2-EQ-Agent 演示视频</title>
+<title>ProQ2-EQ-Agent · 面向编曲辅助的参数优化智能体</title>
 <style>
-  body { margin: 0; padding: 40px 20px; background: #0f172a; color: #e2e8f0;
-         font-family: "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif;
-         text-align: center; }
-  h1 { font-size: 28px; margin-bottom: 8px; }
-  p { color: #94a3b8; margin-bottom: 24px; }
-  video { width: 100%; max-width: 960px; border-radius: 8px; background: #000; }
+  body { margin: 0; padding: 0; background: #0f172a; color: #e2e8f0;
+         font-family: "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", sans-serif; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 48px 20px 64px; }
+  h1 { font-size: 34px; margin: 0 0 8px; }
+  .sub { color: #94a3b8; font-size: 17px; margin-bottom: 28px; }
+  video { width: 100%; border-radius: 10px; background: #000; margin-bottom: 32px; }
+  h2 { font-size: 20px; border-bottom: 1px solid #1e293b; padding-bottom: 8px; }
+  p, li { line-height: 1.8; color: #cbd5e1; }
+  a { color: #38bdf8; }
+  .badge { display: inline-block; background: #1e293b; border-radius: 6px;
+           padding: 4px 12px; margin: 0 8px 8px 0; font-size: 14px; color: #94a3b8; }
 </style>
 </head>
 <body>
+<div class="wrap">
   <h1>ProQ2-EQ-Agent</h1>
-  <p>面向编曲辅助的参数优化智能体 · 演示视频（3–5 分钟）</p>
+  <div class="sub">面向编曲辅助的参数优化智能体 · 2026 江苏省 AI 黑客松参赛作品</div>
+
+  <h2>演示视频</h2>
   <video src="demo.mp4" controls preload="metadata"></video>
+
+  <h2>项目简介</h2>
+  <p>通用参数优化方案，EQ 为首个验证载体。系统只有一个 LLM（Agnes Harness 内智能体），采用"两层一 Critic"架构：语义层生成结构化 dsp_plan，参数层用贝叶斯优化搜索数值，Critic 以 DSP + CLAP 返听打分。基础设施：FL Studio、MIDI 桥、VB-Cable。</p>
+  <div>
+    <span class="badge">Agnes Harness</span>
+    <span class="badge">Bayesian Optimization</span>
+    <span class="badge">FL Studio</span>
+    <span class="badge">MIDI Bridge</span>
+    <span class="badge">CLAP</span>
+  </div>
+
+  <h2>源代码</h2>
+  <p><a href="https://github.com/electriclaniakea-ui/proq2-eq-agent">github.com/electriclaniakea-ui/proq2-eq-agent</a></p>
+</div>
 </body>
 </html>
