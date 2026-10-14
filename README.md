@@ -32,6 +32,7 @@ copy .env.example .env          # 填入 AGNES_API_KEY
 - `agh_plugin/`：真正的 AGH 后端工具插件（JS，比赛用，见其 README）
 - `agh_adapter/`：Python 侧薄包装（本地/其他运行时用）
 - `config/`：运行配置、提示词、Critic 配置 Schema
+- `agh_adapter/`：AGH 插件适配（薄包装）
 - `scripts/`：本地运行、参数 dump/标定、演示对比
 - `tests/`：单元测试（无需 FL）+ 集成测试（需 FL，手动跑）
 - `docs/`：技术设计文档、转移安装指南、会话备忘

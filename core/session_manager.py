@@ -55,12 +55,21 @@ class SessionManager:
         self._save()
 
     def rollback(self):
-        """Return params to roll the plugin back to (accepted state)."""
+        """Return params to roll the plugin back to.
+
+        Prefers the accepted (user-confirmed) state; falls back to the
+        original pre-optimization snapshot recorded by begin_task() when
+        nothing was ever confirmed (e.g. rollback right after optimize
+        without confirm). Only raises when no state was recorded at all.
+        """
         self.candidate = None
         self._save()
-        if self.accepted is None:
-            raise RuntimeError("no accepted state to roll back to")
-        return dict(self.accepted["params"])
+        target = self.accepted if self.accepted is not None else self.original
+        if target is None:
+            raise RuntimeError(
+                "no recorded state to roll back to "
+                "(no optimize has run in this session)")
+        return dict(target["params"])
 
     # ---- persistence --------------------------------------------------------
     def _save(self):

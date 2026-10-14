@@ -1,21 +1,351 @@
 {
- "_comment": "TEMPLATE - fill via scripts/calibrate_param_mapping.py (wiggle calibration). Do not hand-edit blindly.",
- "params": {
-  "频段 2 频率": {
-   "calibration": null,
-   "kind": "freq",
-   "max": 20000,
-   "min": 20,
-   "scale": "log",
-   "unit": "Hz"
-  },
-  "频段 2 增益": {
-   "calibration": null,
-   "kind": "gain",
-   "max": 18,
-   "min": -18,
-   "scale": "linear",
-   "unit": "dB"
+  "_comment": "TEMPLATE - fill via scripts/calibrate_param_mapping.py (wiggle calibration). Do not hand-edit blindly.",
+  "params": {
+    "\u9891\u6bb5 2 \u9891\u7387": {
+      "calibration": [
+        [
+          0.0,
+          20.0
+        ],
+        [
+          0.25,
+          112.0
+        ],
+        [
+          0.5,
+          632.0
+        ],
+        [
+          0.75,
+          3557.0
+        ],
+        [
+          1.0,
+          20000.0
+        ]
+      ],
+      "kind": "freq",
+      "max": 20000,
+      "min": 20,
+      "scale": "log",
+      "unit": "Hz"
+    },
+    "\u9891\u6bb5 2 \u589e\u76ca": {
+      "calibration": [
+        [
+          0.0,
+          -18.0
+        ],
+        [
+          0.25,
+          -9.0
+        ],
+        [
+          0.5,
+          0.0
+        ],
+        [
+          0.75,
+          9.0
+        ],
+        [
+          1.0,
+          18.0
+        ]
+      ],
+      "kind": "freq",
+      "max": 20000,
+      "min": 20,
+      "scale": "log",
+      "unit": "Hz"
+    },
+    "\u68f0\u621e\ue18c 1 \u9422\u975b\u94a9": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 2 \u9422\u975b\u94a9": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 3 \u9422\u975b\u94a9": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 4 \u9422\u975b\u94a9": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 5 \u9422\u975b\u94a9": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 6 \u9422\u975b\u94a9": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 7 \u9422\u975b\u94a9": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 1 \u68f0\u6220\u5dfc": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 2 \u68f0\u6220\u5dfc": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 3 \u68f0\u6220\u5dfc": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 4 \u68f0\u6220\u5dfc": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 5 \u68f0\u6220\u5dfc": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 6 \u68f0\u6220\u5dfc": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 7 \u68f0\u6220\u5dfc": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 1 \u7039\u85c9\u5bb3": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 2 \u7039\u85c9\u5bb3": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 3 \u7039\u85c9\u5bb3": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 4 \u7039\u85c9\u5bb3": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 5 \u7039\u85c9\u5bb3": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 6 \u7039\u85c9\u5bb3": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 7 \u7039\u85c9\u5bb3": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 1 \u7eeb\u8bf2\u7037": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 2 \u7eeb\u8bf2\u7037": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 3 \u7eeb\u8bf2\u7037": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 4 \u7eeb\u8bf2\u7037": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 5 \u7eeb\u8bf2\u7037": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 6 \u7eeb\u8bf2\u7037": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 7 \u7eeb\u8bf2\u7037": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 1 \u95c3\u8235\u669f": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 2 \u95c3\u8235\u669f": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 3 \u95c3\u8235\u669f": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 4 \u95c3\u8235\u669f": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 5 \u95c3\u8235\u669f": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 6 \u95c3\u8235\u669f": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u68f0\u621e\ue18c 7 \u95c3\u8235\u669f": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    },
+    "\u6d93\u8364\u6578\u9a9e?": {
+      "kind": "unknown",
+      "unit": "?",
+      "min": 0,
+      "max": 1,
+      "scale": "linear",
+      "calibration": null
+    }
   }
- }
 }

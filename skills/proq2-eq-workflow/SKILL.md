@@ -12,7 +12,7 @@ You have four tools:
 - `eq_analyze()`: Measure current DSP baseline features. Call FIRST to get baseline values (v0) for planning. Returns 10 DSP dimension values.
 - `eq_optimize(instruction, dsp_plan)`: Run Bayesian optimization (~30 seconds, 30 rounds). `dsp_plan` is YOUR plan (see below). Returns a diagnostic report and candidate. Parameters are written to FL in real time.
 - `eq_confirm_candidate()`: Call after user listens and approves. Locks in current state.
-- `eq_rollback()`: Call if user is unhappy. Rolls back to pre-optimization.
+- `eq_rollback()`: Call if user is unhappy. Rolls back to the last user-confirmed state; if nothing was confirmed yet, falls back to the pre-optimization snapshot instead of failing (returns `ok:false` only when no optimize has ever run).
 
 ## Workflow
 

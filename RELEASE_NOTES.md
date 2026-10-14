@@ -1,6 +1,28 @@
-# ProQ2-EQ-Agent v1.0.0 发行说明 / Release Notes
+# ProQ2-EQ-Agent v1.0.1 发行说明 / Release Notes
 
-发布日期 / Released: 2026-10-12
+发布日期 / Released: 2026-10-14
+
+## v1.0.1 修复 / Fixes in v1.0.1（相对 v1.0.0）
+
+1. **回滚支持多频段参数**：`scripts/session_tool.py` 的回滚写回
+   不再硬编码单频段 `gain_db`/`freq_hz` 键，改为遍历
+   `build_control_params()` 逐频段写回，兼容基线快照
+   （`gain_bN`/`log_freq_bN`）与候选快照（`gain_bN`/`freq_bN`）
+   两种键名。对应运行记录《AGH执行记录运行证明》中
+   eq_rollback 的多频段回滚结果。
+   Rollback now writes back per-band via `build_control_params()`
+   instead of hardcoded single-band `gain_db`/`freq_hz` keys,
+   accepting both baseline (`gain_bN`/`log_freq_bN`) and candidate
+   (`gain_bN`/`freq_bN`) snapshot key conventions — matching the
+   multi-band rollback shown in the execution record.
+2. **回滚兜底**：未确认过候选时，回滚到任务开始前的基线快照
+   而非报错；所有异常转为干净 JSON（`ok:false`）输出。
+   Rollback falls back to the pre-task baseline snapshot when
+   nothing was confirmed; all exceptions surface as clean JSON.
+3. 回滚语义同步写入 `skills/proq2-eq-workflow/SKILL.md`；
+   新增 `tests/test_session_tool.py` 回归测试。
+   Rollback semantics documented in the workflow Skill;
+   new regression tests added.
 
 ## 这是什么 / What is this
 

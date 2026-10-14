@@ -37,12 +37,12 @@
 
 ## 1. 把文件弄到你的电脑
 
-**下载发布包**
-下载 `proq2-eq-agent-release-v1.0.zip`，解压到比如 `D:\hackathon\proq2-eq-agent\`
-（**直接解压，包内已带一层 `proq2-eq-agent/` 文件夹**；不要再套一层，
-也不要把里面的文件一个个拖出来——保持目录结构原样）。
+**下载 zip 包（全量基线 + 增量包）**
+我在 `~/workspace/your_files/` 放了全量基线包 `proq2-eq-agent.zip`，你直接下载、解压到比如 `D:\hackathon\proq2-eq-agent\`。之后我这边有更新时，我会放一个增量包 `change-<N>.zip`（N 是递增的 change 编号），你下载后解压**覆盖到项目根目录**即可，不用每次重下整个项目（别解压到子文件夹里，包内路径已经是相对项目根目录的）。
 
-解压后目录结构应与上面表格一致，且包含 `Agent-4-technical-design.md`（v4.3 设计文档在项目根目录）和 `RELEASE_NOTES.md`（发行说明，先看它再看本指南）。
+解压后目录结构应与上面表格一致，且包含 `Agent-4-technical-design.md`（v4.3 设计文档在项目根目录）。
+
+> 还有一个独立的**发布版** `proq2-eq-agent-release-v1.0.zip`：给评委/外人下载用的干净包（无开发备忘、只留最新插件、带 MIT 许可证和发行说明）。你自己开发用基线包就行，交作品时用发布版。
 
 ---
 
@@ -99,7 +99,7 @@ python -m venv .venv
 
 1. Windows 设置 → 系统 → 声音 → 更多声音设置 → 「录制」选项卡
 2. 右键 `CABLE Output` → 属性 → 「侦听」选项卡
-3. 勾选「侦听此设备」，下面下拉选你的声卡输出 → 确定
+3. 勾选「侦听此设备」，下面下拉选你的 **Roland Rubix 44** 输出 → 确定
 4. 效果：Python 照常从 CABLE Output 录音（不受影响），Windows 同时把声音送到你的声卡耳机/音箱
 
 注意：FL 的输出设备要切到 CABLE Input（WDM 驱动），这期间 FL 不走 ASIO，
@@ -108,12 +108,12 @@ python -m venv .venv
 
 **方案 B：声卡硬件环路（延迟最低，适合演出级监听）**
 
-1. FL 的音频设置**保持 Roland ASIO** 不变，声音照常从声卡的主输出出来
-2. 拿两根线把声卡的输出 1/2 物理接到输入 3/4（后面板的线路输入）
+1. FL 的音频设置**保持 Roland ASIO** 不变，声音照常从 Rubix 44 的主输出出来
+2. 拿两根线把 Rubix 44 的输出 1/2 物理接到输入 3/4（后面板的线路输入）
 3. Python 改从声卡输入录音：`config/agent_config.yaml` 里
-   `audio.input_device` 改成声卡输入设备的全名（用
+   `audio.input_device` 改成 Rubix 输入设备的全名（用
    `.venv\Scripts\python.exe -c "import sounddevice; print(sounddevice.query_devices())"` 查）
-4. ⚠️ **必须关掉声卡上这几个输入的直接监听**（direct monitor），
+4. ⚠️ **必须关掉 Rubix 上这几个输入的直接监听**（direct monitor），
    否则输出→输入→输出形成环路会啸叫
 5. 优点：你听到的是 FL 的 ASIO 直出，零额外延迟；FL 不用切驱动
 
@@ -258,7 +258,8 @@ is fine — the synthetic audio is simple; it still proves the full loop works.�
 ## 9. 对应技术设计文档的位置
 
 - 完整设计：`Agent-4-technical-design.md`（v4.3，项目根目录）
-- 发行说明：`RELEASE_NOTES.md`（版本内容、系统要求、快速开始、已知限制）
+- 本次会话的所有决策与待办：`docs/SESSION_STATE.md`
+- 开发手册 skill（我已给自己装好）：`~/workspace/skills/proq2-eq-agent/`（在我的虚拟机里，你电脑上不需要）
 
 ## 10. AGH（Agnes Harness）接入（D3–D4，不阻塞本地闭环）
 
